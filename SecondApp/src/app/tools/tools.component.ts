@@ -116,6 +116,40 @@ export class ToolsComponent implements AfterViewInit,OnInit, OnDestroy  {
     dialogConfig.data = { toolId };
     const dialogRef = this.dialog.open(ConsulterMemberComponent, dialogConfig);
   }
+  update(id: number): void {
+    this.TS.getToolById(id).subscribe(tool => {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = { tool };
+
+      const dialogRef = this.dialog.open(ToolsCreateComponent, dialogConfig);
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          const updatedTool: Tool = {
+            ...result,
+            id: id
+          };
+          this.TS.updateTool(updatedTool).subscribe(() => {
+            this.loadTools();
+          });
+        }
+      });
+    });
+  }
+
+
+
+  delete(id: number): void {
+    const confirmed = window.confirm('Êtes-vous sûr de vouloir supprimer cet outil ?');
+    if (confirmed) {
+      this.TS.deleteTool(id).subscribe(() => {
+        this.loadTools(); // Rechargez la liste des outils après suppression
+      });
+    }
+  }
+
 
   ngOnInit() {
     this.loadTools();

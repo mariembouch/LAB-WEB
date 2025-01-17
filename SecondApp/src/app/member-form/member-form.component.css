@@ -23,3 +23,14 @@
 body{
   height: 100vh;
 }
+.image-btn {
+  width: 400px; /* ajuster la taille de l'image */
+  height: 400px;
+  cursor: pointer; /* curseur de clic sur les images */
+  border-radius: 8px; /* bordure arrondie, optionnelle */
+}
+
+.bordered {
+  border: 4px solid darkred; /* bordure darkred autour de l'image */
+  padding: 5px; /* pour ajouter un peu d'espace entre l'image et la bordure */
+}

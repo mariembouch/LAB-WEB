@@ -12,7 +12,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MemberComponent } from './member/member.component';
 import { MemberFormComponent } from './member-form/member-form.component';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -54,13 +53,16 @@ import { ConsulterMemberComponent } from './consulter-member/consulter-member.co
 import { ConsulterInvitesComponent } from './consulter-invites/consulter-invites.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { ArticleCreateComponent } from './article-create/article-create.component';
+import { MemberEnseignantComponent } from './member-enseignant/member-enseignant.component';
+import { MemberEtudiantComponent } from './member-etudiant/member-etudiant.component';
 
 @NgModule({
   declarations: [
 
     AppComponent,
-    MemberComponent,
     MemberFormComponent,
+    MemberEnseignantComponent,
+    MemberEtudiantComponent,
     LayoutComponent,
     ArticlesComponent,
     DashboardComponent,
@@ -76,6 +78,7 @@ import { ArticleCreateComponent } from './article-create/article-create.componen
     ConsulterMemberComponent,
     ConsulterInvitesComponent,
     ArticleCreateComponent,
+    MemberEnseignantComponent,
 
 
   ],

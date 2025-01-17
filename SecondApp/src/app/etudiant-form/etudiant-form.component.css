@@ -1,46 +1,49 @@
 :host {
-  margin-top: -2.2vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90.5vh;
-  background: linear-gradient(to bottom right,#425cb8 , #a8bbff);
+  height: 85vh;
 }
-
 
 .example-form-container {
-  width: 800px;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* Adjust if needed */
+  width: 750px;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px darkred;
+  background-color: #ffffff;
 }
 
-
-.text-align-center{
+.text-align-center {
   text-align: center;
-}
-.example-form {
-  width: 80%;
-  /* Adjust the width of the form container */
+  color: #66a300;
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .form-row {
   display: flex;
   gap: 20px;
-  /* Adjust the gap between form fields */
-  margin-bottom: 15px;
-
-  /* Adjust the margin between form rows */
-
+  margin-bottom: 20px;
 }
-    .submit-button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
-    /* Adjust the margin at the top of the submit button */
-  }
+
+.example-full-width {
+  width: 100%;
+}
+
+.green-button {
+  background-color: #66a300 !important;
+  color: white;
+  font-weight: bold;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.green-button:hover {
+  background-color:#66a300 !important;
+  transform: scale(1.1);
+}
+
+.submit-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

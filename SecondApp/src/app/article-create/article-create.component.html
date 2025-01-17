@@ -1,28 +1,58 @@
-<h2 mat-dialog-title>Tools Form</h2>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+      <div class="card form-container">
+        <div class="card-header">
+          <h4 class="form-title">{{ isEditMode ? 'Modifier' : 'Créer' }} un Article</h4>
+        </div>
+        
+        <div class="card-body">
+          <form [formGroup]="form">
+            <div class="mb-3">
+              <label class="form-label">Titre</label>
+              <input type="text" 
+                     class="form-control" 
+                     formControlName="titre" 
+                     placeholder="Entrer le titre">
+            </div>
 
-<mat-dialog-content [formGroup]="form" fxLayout="column" fxLayoutAlign="space-evenly center">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Titre</mat-label>
-    <input matInput name="titre" formControlName="titre" />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Lien</mat-label>
-    <input matInput name="lien" formControlName="lien" />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Enter a date</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Select a date" />
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Source PDF</mat-label>
-    <input matInput name="sourcepdf" formControlName="sourcepdf" />
-  </mat-form-field>
+            <div class="mb-3">
+              <label class="form-label">Lien</label>
+              <input type="url" 
+                     class="form-control" 
+                     formControlName="lien" 
+                     placeholder="http://...">
+            </div>
 
-</mat-dialog-content>
+            <div class="mb-3">
+              <label class="form-label">Date</label>
+              <input type="date" 
+                     class="form-control" 
+                     formControlName="date">
+            </div>
 
-<mat-dialog-actions fxLayout="row" fxLayoutAlign="space-evenly center" >
-  <button mat-raised-button color="primary" (click)="close()"> Quitter</button>
-  <button mat-raised-button color="warn" (click)="save()"> Soumettre</button>
-</mat-dialog-actions>
+            <div class="mb-3">
+              <label class="form-label">Source PDF</label>
+              <input type="text" 
+                     class="form-control" 
+                     formControlName="sourcepdf" 
+                     placeholder="Lien vers le PDF">
+            </div>
+
+            <div class="d-flex justify-content-end gap-3">
+              <button type="button" 
+                      class="btn btn-outline-secondary" 
+                      (click)="close()">Annuler</button>
+              <button type="submit" 
+                      class="btn btn-success" 
+                      (click)="save()" 
+                      [disabled]="!form.valid">
+                {{ isEditMode ? 'Modifier' : 'Créer' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

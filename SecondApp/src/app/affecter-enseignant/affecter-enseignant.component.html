@@ -1,16 +1,23 @@
-<h2 mat-dialog-title>Tools Form</h2>
+<h2 mat-dialog-title class="dialog-title">
+  <mat-icon>build</mat-icon> Tools Form
+</h2>
 
-<mat-dialog-content [formGroup]="form" fxLayout="column" fxLayoutAlign="space-evenly center">
-  <mat-form-field>
+<mat-dialog-content [formGroup]="form" fxLayout="column" fxLayoutAlign="space-evenly center" class="dialog-content">
+  <mat-form-field class="custom-form-field">
     <mat-label>Encadrant</mat-label>
     <mat-select formControlName="encadrant">
-        <mat-option *ngFor="let enseignant of enseignants" [value]="enseignant">{{enseignant.prenom}} {{enseignant.nom}}</mat-option>
+      <mat-option *ngFor="let enseignant of enseignants" [value]="enseignant">
+        {{ enseignant.prenom }} {{ enseignant.nom }}
+      </mat-option>
     </mat-select>
   </mat-form-field>
-
 </mat-dialog-content>
 
-<mat-dialog-actions fxLayout="row" fxLayoutAlign="space-evenly center" >
-  <button mat-raised-button color="primary" (click)="close()"> Quitter</button>
-  <button mat-raised-button color="warn" (click)="save()"> Soumettre</button>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="space-evenly center" class="dialog-actions">
+  <button mat-raised-button color="primary" (click)="close()" class="action-button cancel-button">
+    <mat-icon>cancel</mat-icon> Quitter
+  </button>
+  <button mat-raised-button color="accent" (click)="save()" class="action-button submit-button">
+    <mat-icon>add_circle</mat-icon> Soumettre
+  </button>
 </mat-dialog-actions>

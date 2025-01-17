@@ -13,7 +13,7 @@ import { MemberService } from 'src/services/member.service';
   styleUrls: ['./tools-create.component.css']
 })
 export class ToolsCreateComponent implements OnInit {
-  
+
   form!: FormGroup;
   constructor(
     private fb: FormBuilder,
@@ -35,6 +35,8 @@ export class ToolsCreateComponent implements OnInit {
 
     this.initForm();
   }
+
+
 
   close(){
     this.dialogRef.close();

@@ -1,4 +1,7 @@
-<h2 mat-dialog-title>Tools Form</h2>
+<h2 mat-dialog-title>
+  <mat-icon>settings</mat-icon>
+  Tools Form
+</h2>
 
 <mat-dialog-content [formGroup]="form" fxLayout="column" fxLayoutAlign="space-evenly center">
   <mat-form-field>
@@ -9,25 +12,20 @@
     <mat-label>date de creation</mat-label>
     <input matInput formControlName="date" [matDatepicker]="pickerDate">
     <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix  [for]="pickerDate"></mat-datepicker-toggle>
+    <mat-datepicker-toggle matIconSuffix [for]="pickerDate"></mat-datepicker-toggle>
     <mat-datepicker #pickerDate></mat-datepicker>
   </mat-form-field>
-
   <mat-form-field>
     <mat-label>source</mat-label>
     <input matInput placeholder="google.com" formControlName="source" />
   </mat-form-field>
-
-  <!-- <mat-form-field>
-    <mat-label>createur</mat-label>
-    <mat-select formControlName="createur">
-        <mat-option *ngFor="let member of members" [value]="member">{{member.prenom}} {{member.nom}}</mat-option>
-    </mat-select>
-  </mat-form-field> -->
-
 </mat-dialog-content>
 
-<mat-dialog-actions fxLayout="row" fxLayoutAlign="space-evenly center" >
-  <button mat-raised-button color="primary" (click)="close()"> Quitter</button>
-  <button mat-raised-button color="warn" (click)="save()"> Soumettre</button>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="space-evenly center">
+  <button mat-raised-button color="primary" (click)="close()">
+    <mat-icon>close</mat-icon> Quitter
+  </button>
+  <button mat-raised-button color="warn" (click)="save()">
+    <mat-icon>check_circle</mat-icon> Soumettre
+  </button>
 </mat-dialog-actions>

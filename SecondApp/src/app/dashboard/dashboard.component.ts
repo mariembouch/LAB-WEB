@@ -115,6 +115,7 @@ export class DashboardComponent implements OnInit{
        this.chartData= [...this.chartData, {
         label: 'articles',
         data: [...tab ]
+        
     }]
     });
     this.MS.getNbOutilMembers().subscribe((tab)=> { 
@@ -133,6 +134,7 @@ export class DashboardComponent implements OnInit{
           // ⤵️ Add these
           label: 'Number',
           data: [etudiantValue, enseignantValue]
+          
         }
       ];
 

@@ -27,10 +27,7 @@ export class EtudiantFormComponent  implements OnInit {
       prenom: new FormControl(null, [Validators.required]),
       dateNaissance: new FormControl(null, [Validators.required]),
       cv: new FormControl(null, [Validators.required]),
-      // email: new FormControl(null, [Validators.required]),
-      // password: new FormControl(null, [Validators.required]),
-      // role : new FormControl("etudiant", [Validators.required]),
-      // encadrant : new FormControl(null, [Validators.required]),
+      
       dateInscription : new FormControl(null, [Validators.required]),
       diplome : new FormControl(null, []),
       sujet : new FormControl(null, []),
@@ -44,10 +41,7 @@ export class EtudiantFormComponent  implements OnInit {
       prenom: new FormControl(etudiant.prenom, [Validators.required]),
       dateNaissance: new FormControl(etudiant.dateNaissance, [Validators.required]),
       cv: new FormControl(etudiant.cv, [Validators.required]),
-      // email: new FormControl(etudiant.email, [Validators.required, Validators.email]),
-      // password: new FormControl(etudiant.password, [Validators.required]),
-      // role : new FormControl(etudiant.role, [Validators.required]),
-      // encadrant : new FormControl(etudiant.encadrant, [Validators.required]),
+      
       dateInscription : new FormControl(etudiant.dateInscription, [Validators.required]),
       diplome : new FormControl(etudiant.diplome, []),
       sujet : new FormControl(etudiant.sujet, []),
@@ -57,10 +51,9 @@ export class EtudiantFormComponent  implements OnInit {
   }
   ngOnInit():void{
 
-    // this.MS.getEnseignants().subscribe((enseignants)=>{this.enseignants = enseignants});
-    this.idCourant1 = this.activatedRoute.snapshot.params['id']; // "1234"
+    this.idCourant1 = this.activatedRoute.snapshot.params['id']; 
     console.log(this.idCourant1);
-    if (!!this.idCourant1) // if truly idCourant  // je suis dans edit
+    if (!!this.idCourant1) 
     {
       this.MS.getMemberById(this.idCourant1).subscribe((etudiant)=>{
           this.etudiantGlobal = etudiant;
@@ -88,9 +81,9 @@ export class EtudiantFormComponent  implements OnInit {
     if (!!this.idCourant1) // if truly idCourant  // je suis dans edit
     {
       etudiant = {id:this.idCourant1, ...etudiant};
-      this.MS.updateMember("etudiant", etudiant).subscribe(()=> {this.router.navigate(['/members'])});
+      this.MS.updateMember("etudiant", etudiant).subscribe(()=> {this.router.navigate(['/members/etudiant/visit'])});
     }else{
-      this.MS.saveMember("etudiant", etudiant).subscribe(()=> {this.router.navigate(['/members'])});
+      this.MS.saveMember("etudiant", etudiant).subscribe(()=> {this.router.navigate(['/members/etudiant/visit'])});
     }
     }
 }

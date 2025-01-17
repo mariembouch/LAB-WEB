@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Publication } from 'src/models/publication';
-import { PublicationService } from 'src/services/publication.service';
 
 @Component({
   selector: 'app-article-create',
@@ -11,46 +9,40 @@ import { PublicationService } from 'src/services/publication.service';
   styleUrls: ['./article-create.component.css']
 })
 export class ArticleCreateComponent implements OnInit {
-  form: FormGroup; // Ensure form is always initialized
-  pubGlobal!: Publication;
+  form: FormGroup;
+  isEditMode = false;
 
   constructor(
-    private PS: PublicationService,
-    private router: Router,
     private dialogRef: MatDialogRef<ArticleCreateComponent>,
-    private activatedRoute: ActivatedRoute
+    @Inject(MAT_DIALOG_DATA) public data: { publication?: Publication }
   ) {
-    // Initialize the form with empty values to avoid undefined errors
     this.form = new FormGroup({
-      titre: new FormControl(null, [Validators.required]),
-      lien: new FormControl(null, [Validators.required]),
+      titre: new FormControl('', [Validators.required]),
+      lien: new FormControl('', [Validators.required]),
       date: new FormControl(null),
-      sourcepdf: new FormControl(null, [Validators.required]),
+      sourcepdf: new FormControl('', [Validators.required]),
     });
   }
 
   ngOnInit(): void {
-    const idCourant1 = this.activatedRoute.snapshot.params['id'];
-    console.log(idCourant1);
-
-    if (!!idCourant1) {
-      // If ID is present, load the publication and update the form
-      this.PS.getPublicationById(idCourant1).subscribe((pub) => {
-        this.pubGlobal = pub;
-        this.form.patchValue(pub); // Update form values with fetched data
+    if (this.data?.publication) {
+      this.isEditMode = true;
+      this.form.patchValue({
+        titre: this.data.publication.titre,
+        lien: this.data.publication.lien,
+        date: this.data.publication.date,
+        sourcepdf: this.data.publication.sourcepdf
       });
+    }
+  }
+
+  save(): void {
+    if (this.form.valid) {
+      this.dialogRef.close(this.form.value);
     }
   }
 
   close(): void {
     this.dialogRef.close();
-  }
-
-  save(): void {
-    if (this.form.valid) {
-      this.dialogRef.close(this.form.value); // Pass form values to the dialog's close function
-    } else {
-      console.error('Form is invalid:', this.form.errors);
-    }
   }
 }

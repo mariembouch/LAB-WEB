@@ -71,9 +71,9 @@ export class EnseignantFormComponent {
     if (!!this.idCourant1) // if truly idCourant  // je suis dans edit
     {
       enseignant = {id:this.idCourant1, ...enseignant};
-      this.MS.updateMember("enseignant", enseignant).subscribe(()=> {this.router.navigate(['/members'])});
+      this.MS.updateMember("enseignant", enseignant).subscribe(()=> {this.router.navigate(['/members/enseignant/visit'])});
     }else{
-      this.MS.saveMember("enseignant", enseignant).subscribe(()=> {this.router.navigate(['/members'])});
+      this.MS.saveMember("enseignant", enseignant).subscribe(()=> {this.router.navigate(['/members/enseignant/visit'])});
     }
 
 

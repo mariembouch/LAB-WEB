@@ -1,44 +1,24 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { GLOBAL } from '../app-config';
-import { Member } from 'src/models/member';
-import { MemberService } from 'src/services/member.service';
-import { MatSort } from '@angular/material/sort';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Enseignant } from 'src/models/enseignant';
 import { Etudiant } from 'src/models/etudiant';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Member } from 'src/models/member';
+import { MemberService } from 'src/services/member.service';
 import { AffecterEnseignantComponent } from '../affecter-enseignant/affecter-enseignant.component';
 import { Router } from '@angular/router';
 
-
 @Component({
-  selector: 'app-member',
-  templateUrl: './member.component.html',
-  styleUrls: ['./member.component.css']
+  selector: 'app-member-etudiant',
+  templateUrl: './member-etudiant.component.html',
+  styleUrls: ['./member-etudiant.component.css']
 })
-export class MemberComponent implements AfterViewInit, OnInit{
-  enseignantSource: MatTableDataSource<Enseignant>; // db.tab.enseignants
+export class MemberEtudiantComponent  implements AfterViewInit, OnInit{
   etudiantSource: MatTableDataSource<Etudiant>;
-
-  enseignantColumns: string[] = [ 'cin', 'nom','prenom','dateNaissance','cv', 'grade', 'etablissement', 'actions'];
   etudiantColumns: string[] = [ 'cin', 'nom','prenom','dateNaissance','cv','encadrant','dateInscription','diplome','sujet', 'actions'];
-
-  @ViewChild('enseignantPaginator') enseignantPaginator: MatPaginator;
   @ViewChild('etudiantPaginator') etudiantPaginator: MatPaginator;
-
-  loadMembers() : void{
-    // Enseignants
-    this.MS.getEnseignants().subscribe(members => {
-      this.enseignantSource = new MatTableDataSource(members);
-
-      if (this.enseignantSource){
-        console.log(this.enseignantSource.data);
-        this.enseignantSource.paginator = this.enseignantPaginator; // Assign the paginator
-      }
-
-    });
-
+loadMembers() : void{
+    
     // Etudiants
     this.MS.getEtudiants().subscribe(members => {
       this.etudiantSource = new MatTableDataSource(members);
@@ -61,14 +41,7 @@ export class MemberComponent implements AfterViewInit, OnInit{
 
   }
 
-  applyFilterOnEnseignants(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.enseignantSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.enseignantSource.paginator) {
-      this.enseignantSource.paginator.firstPage();
-    }
-  }
+ 
 
   applyFilterOnEtudiants(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -103,12 +76,7 @@ export class MemberComponent implements AfterViewInit, OnInit{
 
   }
 
-  deleteEnseignant(memberId: number){
-    this.MS.deleteEnseignant(memberId).subscribe(()=>{
-      this.loadMembers();
-    })
-  }
-
+  
   deleteEtudiant(memberId: number){
     this.MS.deleteEtudiant(memberId).subscribe(()=>{
       this.loadMembers();

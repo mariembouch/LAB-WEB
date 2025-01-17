@@ -18,7 +18,7 @@ import { ArticleCreateComponent } from '../article-create/article-create.compone
   styleUrls: ['./articles.component.css']
 })
 export class ArticlesComponent implements OnInit, OnDestroy, AfterViewInit{
-  displayedColumns: string[] = ["id", "titre", "date", "lien", "sourcepdf"];
+  displayedColumns: string[] = ['id', 'titre', 'date', 'lien', 'sourcepdf', 'actions'];
   dataSource: MatTableDataSource<Publication>;
   obs: Observable<any>;
 
@@ -89,14 +89,39 @@ $pub: Publication;
       });
     });
 
+    
+
 
 
   }
-  delete(id : number): void{
-    this.PS.deletePublication(id).subscribe(()=>{
-      this.loadPublications();
-    })
-
+  editArticle(id: number): void {
+    this.PS.getPublicationById(id).subscribe(publication => {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = { publication };
+  
+      const dialogRef = this.dialog.open(ArticleCreateComponent, dialogConfig);
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          const updatedPublication: Publication = {
+            ...result,
+            id: id
+          };
+          this.PS.updatePublication(updatedPublication).subscribe(() => {
+            this.loadPublications();
+          });
+        }
+      });
+    });
+  }
+  delete(id: number): void {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
+      this.PS.deletePublication(id).subscribe(() => {
+        this.loadPublications();
+      });
+    }
   }
 
   openArticleCreate(): void{
