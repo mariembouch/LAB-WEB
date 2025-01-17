@@ -23,23 +23,23 @@
         <table mat-table [dataSource]="etudiantSource" class="pastel-grad" matSort>
      
           <ng-container matColumnDef="cin">
-            <th mat-header-cell *matHeaderCellDef>CIN</th>
+            <th mat-header-cell *matHeaderCellDef style="color:darkred;">CIN</th>
             <td mat-cell *matCellDef="let element">{{ element.cin }}</td>
           </ng-container>
           <ng-container matColumnDef="nom">
-            <th mat-header-cell *matHeaderCellDef>NOM</th>
+            <th mat-header-cell *matHeaderCellDef style="color:darkred;">NOM</th>
             <td mat-cell *matCellDef="let element">{{ element.nom }}</td>
           </ng-container>
           <ng-container matColumnDef="prenom">
-            <th mat-header-cell *matHeaderCellDef>PRENOM</th>
+            <th mat-header-cell *matHeaderCellDef style="color:darkred;">PRENOM</th>
             <td mat-cell *matCellDef="let element">{{ element.prenom }}</td>
           </ng-container>
           <ng-container matColumnDef="dateNaissance">
-            <th mat-header-cell *matHeaderCellDef>DATE NAISSANCE</th>
+            <th mat-header-cell *matHeaderCellDef style="color:darkred;">DATE NAISSANCE</th>
             <td mat-cell *matCellDef="let element">{{ element.dateNaissance }}</td>
           </ng-container>
           <ng-container matColumnDef="cv">
-            <th mat-header-cell *matHeaderCellDef>CV</th>
+            <th mat-header-cell *matHeaderCellDef style="color:darkred;">CV</th>
             <td mat-cell *matCellDef="let element">
               <a href="{{ element.cv }}" mat-icon-button color="primary">
                 <mat-icon style="color: #66A300;">picture_as_pdf</mat-icon>
@@ -47,7 +47,7 @@
             </td>
           </ng-container>
           <ng-container matColumnDef="encadrant">
-            <th mat-header-cell *matHeaderCellDef>ENCADRANT</th>
+            <th mat-header-cell *matHeaderCellDef style="color:darkred;">ENCADRANT</th>
             <td mat-cell *matCellDef="let element">
               <ng-container *ngIf="element.encadrant != null; else affecterButton">
                 <button mat-stroked-button style="color: #66A300;" (click)="affecter(element)">
@@ -62,15 +62,15 @@
   
           </ng-container>
           <ng-container matColumnDef="dateInscription">
-            <th mat-header-cell *matHeaderCellDef>DATE INSCRIPTION</th>
+            <th mat-header-cell *matHeaderCellDef style="color:darkred;">DATE INSCRIPTION</th>
             <td mat-cell *matCellDef="let element">{{ element.dateInscription }}</td>
           </ng-container>
           <ng-container matColumnDef="diplome">
-            <th mat-header-cell *matHeaderCellDef>DIPLOME</th>
+            <th mat-header-cell *matHeaderCellDef style="color:darkred;">DIPLOME</th>
             <td mat-cell *matCellDef="let element">{{ element.diplome }}</td>
           </ng-container>
           <ng-container matColumnDef="sujet">
-            <th mat-header-cell *matHeaderCellDef>SUJET</th>
+            <th mat-header-cell *matHeaderCellDef style="color:darkred;">SUJET</th>
             <td mat-cell *matCellDef="let element">{{ element.sujet }}</td>
           </ng-container>
           <ng-container matColumnDef="actions" stickyEnd>
