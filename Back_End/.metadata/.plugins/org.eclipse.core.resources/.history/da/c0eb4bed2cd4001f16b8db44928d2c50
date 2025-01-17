@@ -1,0 +1,170 @@
+package com.example.demo;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+
+import com.example.demo.beans.EvenementBean;
+import com.example.demo.beans.OutilBean;
+import com.example.demo.beans.PublicationBean;
+import com.example.demo.entities.Enseignant;
+import com.example.demo.entities.Etudiant;
+import com.example.demo.entities.Membre;
+import com.example.demo.proxies.EvenementProxyService;
+import com.example.demo.proxies.OutilProxyService;
+import com.example.demo.proxies.PublicationProxyService;
+
+import com.example.demo.repository.EnseignantChercheurRepository;
+import com.example.demo.repository.EtudiantRepository;
+import com.example.demo.services.IMemberService;
+
+import lombok.AllArgsConstructor;
+
+
+
+@SpringBootApplication
+@EnableDiscoveryClient
+@EnableFeignClients
+@AllArgsConstructor
+public class MembreServiceApplication implements CommandLineRunner {
+	EtudiantRepository etudiantRepository;
+	EnseignantChercheurRepository enseignantChercheurRepository ;
+	IMemberService memberService;
+
+	public static void main(String[] args) {
+		SpringApplication.run(MembreServiceApplication.class, args);
+	}
+	
+	private PublicationProxyService publicationProxyService;
+	private EvenementProxyService evenementProxyService;
+	private OutilProxyService outilProxyService;
+	public void run(String... args) throws Exception {
+	Etudiant etd1=Etudiant.builder()
+			.nom("ayadi")
+			.prenom("ahmed")
+			.cin("456876")
+			.cv("cv.pdf")
+			.dateNaissance(new Date())
+			.email("ayadi.amine@enis.tn")
+			.password("1456")
+			.build();
+	
+	etudiantRepository.save(etd1);
+	
+	
+	Etudiant etd2=Etudiant.builder()
+			.nom("aya")
+			.prenom("aya")
+			.cin("45678876")
+			.cv("cv.pdf")
+			.dateNaissance(new Date())
+			.email("aya@enis.tn")
+			.password("12456")
+			.build();
+	
+	etudiantRepository.save(etd2);
+	
+	Etudiant etd3=Etudiant.builder()
+			.nom("rahma")
+			.prenom("rahma")
+			.cin("876")
+			.cv("cv.pdf")
+			.dateNaissance(new Date())
+			.email("rahma@enis.tn")
+			.password("156")
+			.build();
+	
+	etudiantRepository.save(etd3);
+	
+	Enseignant ens1=Enseignant.builder()
+			.nom("mannai")
+			.prenom("sirine")
+			.cin("4568767")
+			.cv("cv.pdf")
+			.dateNaissance(new Date())
+			.email("mannai.sirine@enis.tn")
+			.password("1456789")
+			.build();
+	enseignantChercheurRepository.save(ens1);
+	
+	Enseignant ens2=Enseignant.builder()
+			.nom("mannai")
+			.prenom("jihen")
+			.cin("456876788999")
+			.cv("cv.pdf")
+			.dateNaissance(new Date())
+			.email("mannai.jihen@enis.tn")
+			.password("1456789")
+			.build();
+	enseignantChercheurRepository.save(ens2);
+	
+	
+	
+	
+	// Création d'un deuxième enseignant via addMember
+    Membre ens3 = new Enseignant();
+    ens3.setNom("khoukha");
+    ens3.setPrenom("chayma");
+    ens3.setCin("09983245");
+    ens3.setCv("cv.pdf");
+    ens3.setDateNaissance(new Date());
+    ens3.setEmail("chayma.@enis.tn");
+    ens3.setPassword("654321");
+    ((Enseignant) ens3).setGrade("Maître ");
+    ((Enseignant) ens3).setEtablissement("ENIT");
+    memberService.addMember(ens3);
+    System.out.println("Membre (Enseignant) ajouté : " + ens3);
+	
+	
+	// Update a Member
+		Membre m= memberService.findMember(1L);
+		m.setCv("cv1.pdf");
+		memberService.updateMember(m);
+		// Delete a Member
+		//memberService.deleteMember(2L);
+		
+		memberService.affecterEtudiantToEnseignant(1L,4L); /// 1L equivalent a new Long(1)
+		memberService.affecterEtudiantToEnseignant(2L,4L); /// 1L equivalent a new Long(1)
+		memberService.affecterEtudiantToEnseignant(3L,5L); /// 1L equivalent a new Long(1)
+		
+		
+		
+		/// pour afficher la liste des etudiant de chaque enseignant
+		List<Etudiant> e = memberService.findByEncadrant(ens1);
+		 for (Etudiant etudiant : e) {
+		   System.out.println( ens1.getNom() +" "+ens1.getPrenom()+ " encadre " +etudiant.getNom()+" "+etudiant.getPrenom());
+		}
+		 
+		 List<Etudiant> e2 = memberService.findByEncadrant(ens2);
+		 for (Etudiant etudiant : e2) {
+		   System.out.println( ens2.getNom() +" "+ens2.getPrenom()+ " encadre " +etudiant.getNom()+" "+etudiant.getPrenom());
+		}
+		 
+		 PublicationBean p = publicationProxyService.findPublicationById(1L);
+			System.out.println(p.getTitle());
+			
+		EvenementBean ev = evenementProxyService.findEvenementById(1L);
+			System.out.println(ev.getTitle());
+
+
+		
+	
+	OutilBean o = outilProxyService.findOutilById(1L);
+	System.out.println(o.getSource());
+
+
+	}
+	
+	
+   
+	
+
+	
+	
+}

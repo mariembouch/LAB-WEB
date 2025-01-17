@@ -1,0 +1,7 @@
+spring.application.name=Gateway
+server.port=9000
+spring.cloud.discovery.enabled=true
+# Configuration CORS
+spring.cloud.gateway.globalcors.corsConfigurations.[/**].allowedOrigins=*
+spring.cloud.gateway.globalcors.corsConfigurations.[/**].allowedMethods=GET, POST, PUT, DELETE, OPTIONS
+spring.cloud.gateway.globalcors.corsConfigurations.[/**].allowedHeaders=*
