@@ -30,6 +30,8 @@ const routes: Routes = [
   {path:'events', children:[
     {path: '', pathMatch:'full', component:EventsComponent},
     {path:'create', pathMatch:'full', component:EventCreateComponent},
+    { path: ':id/edit', pathMatch: 'full', component: EventCreateComponent }
+
   ], canActivate: [AuthGuard]},
 
 

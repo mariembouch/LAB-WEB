@@ -1,38 +1,61 @@
-<div class="form-container">
-  <form [formGroup]="range" (ngSubmit)="OnSubmit()">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Titre</mat-label>
-      <input
-        matInput
-        name="titre"
-        formControlName="titre"
-        placeholder="WIE  ACT "
-      />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Enter a date range</mat-label>
-      <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-        <input
-          matStartDate
-          formControlName="dateDebut"
-          placeholder="Start date"
-        />
-        <input matEndDate formControlName="dateFin" placeholder="End date" />
-      </mat-date-range-input>
-      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-date-range-picker #picker></mat-date-range-picker>
-    </mat-form-field>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-header bg-light">
+          <h4 class="mb-0">{{ isEditMode ? 'Modifier' : 'Créer' }} un événement</h4>
+        </div>
 
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Lieu</mat-label>
-      <input matInput name="lieu" formControlName="lieu" placeholder="Sfax" />
-    </mat-form-field>
-    <div fxLayout="row" fxLayoutAlign="space-evenly center">
-      <button mat-fab extended color="primary" type="submit">
-        <mat-icon>change_history</mat-icon>
-        Submit
-      </button>
+        <div class="card-body">
+          <form [formGroup]="range" (ngSubmit)="OnSubmit()">
+            <div class="mb-3">
+              <label class="form-label">Titre</label>
+              <input type="text"
+                     class="form-control" 
+                     formControlName="titre"
+                     placeholder="Titre de l'événement">
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label class="form-label">Date de début</label>
+                <input type="date"
+                       class="form-control" 
+                       formControlName="dateDebut">
+              </div>
+              
+              <div class="col-md-6">
+                <label class="form-label">Date de fin</label>
+                <input type="date"
+                       class="form-control" 
+                       formControlName="dateFin">
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Lieu</label>
+              <input type="text"
+                     class="form-control" 
+                     formControlName="lieu"
+                     placeholder="Lieu de l'événement">
+            </div>
+
+            <div class="d-flex justify-content-end gap-2">
+              <button type="button" 
+                      class="btn btn-secondary"
+                      (click)="close()">
+                <i class="fas fa-times"></i> Annuler
+              </button>
+              <button type="submit"
+                      class="btn btn-primary"
+                      [disabled]="!range.valid">
+                <i class="fas fa-save"></i> 
+                {{ isEditMode ? 'Modifier' : 'Créer' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  </form>
+  </div>
 </div>

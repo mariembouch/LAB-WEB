@@ -1,60 +1,77 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Evenement } from 'src/models/event';
 import { EvenementService } from 'src/services/event.service';
 
 @Component({
   selector: 'app-event-create',
   templateUrl: './event-create.component.html',
-  styleUrls: ['./event-create.component.css'],
+  styleUrls: ['./event-create.component.css']
 })
-export class EventCreateComponent {
-  form!: FormGroup;
-  eventGlobal!: Evenement;
+export class EventCreateComponent implements OnInit {
+  isEditMode = false;
+  eventId: number;
+
   range = new FormGroup({
-    titre: new FormControl(null, [Validators.required]),
-    dateDebut: new FormControl<string | null>(null, [Validators.required]),
-    dateFin: new FormControl<string | null>(null),
-    lieu: new FormControl(null, [Validators.required]),
+    titre: new FormControl('', [Validators.required]),
+    dateDebut: new FormControl('', [Validators.required]),
+    dateFin: new FormControl(''),
+    lieu: new FormControl('', [Validators.required])
   });
+
   constructor(
     private ES: EvenementService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private route: ActivatedRoute
   ) {}
 
-  initForm2(event: Evenement): void {
-    this.form = new FormGroup({
-      titre: new FormControl(event.titre, [Validators.required]),
-      dateDebut: new FormControl(event.dateDebut, [Validators.required]),
-      dateFin: new FormControl(event.dateFin, []),
-      lieu: new FormControl(event.lieu, [Validators.required]),
-    });
-  }
   ngOnInit(): void {
-    const idCourant1 = this.activatedRoute.snapshot.params['id']; // "1234"
-    console.log(idCourant1);
-    if (!!idCourant1) {
-      // if truly idCourant  // je suis dans edit
-      this.ES.getEvenementById(idCourant1).subscribe((event) => {
-        this.eventGlobal = event;
-        this.initForm2(event);
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.isEditMode = true;
+      this.eventId = +id;
+      this.ES.getEvenementById(this.eventId).subscribe(event => {
+        if (event) {
+          const startDate = new Date(event.dateDebut).toISOString().split('T')[0];
+          const endDate = new Date(event.dateFin).toISOString().split('T')[0];
+          
+          this.range.patchValue({
+            titre: event.titre,
+            dateDebut: startDate,
+            dateFin: endDate,
+            lieu: event.lieu
+          });
+        }
       });
     }
   }
 
   OnSubmit(): void {
-    // récupérer le contenu
-    console.log(this.range.value);
+    if (this.range.valid) {
+      const formValue = this.range.value;
+      
+      const eventData: Evenement = {
+        id: this.isEditMode ? this.eventId : 0,
+        titre: formValue.titre || '',
+        dateDebut: formValue.dateDebut ? new Date(formValue.dateDebut).toISOString() : new Date().toISOString(),
+        dateFin: formValue.dateFin ? new Date(formValue.dateFin).toISOString() : new Date().toISOString(),
+        lieu: formValue.lieu || ''
+      };
 
-    const event = { ...this.range.value, ...this.eventGlobal };
-    // const eventNew = {
-    //   ...event,
-    //   id: event.id ?? Math.ceil(Math.random() * 1000),
-    // };
-    this.ES.saveEvenement(event).subscribe(() => {
-      this.router.navigate(['/events']);
-    });
+      if (this.isEditMode) {
+        this.ES.updateEvenement(eventData).subscribe(() => {
+          this.router.navigate(['/events']);
+        });
+      } else {
+        this.ES.saveEvenement(eventData).subscribe(() => {
+          this.router.navigate(['/events']);
+        });
+      }
+    }
+  }
+
+  close(): void {
+    this.router.navigate(['/events']);
   }
 }

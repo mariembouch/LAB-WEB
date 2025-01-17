@@ -7906,3 +7906,81 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2025-01-17 23:34:48.281 -----------------------------------------------
+eclipse.buildId=4.33.0.202410162246
+java.version=21.0.4
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=fr_FR
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springframework.boot.ide.branding.sts4
+
+!ENTRY ch.qos.logback.classic 1 0 2025-01-17 23:34:51.214
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-01-17 23:35:00.196
+!MESSAGE Logback config file: C:\Users\ASUS\Projet_Spring\Back_End\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.6.1.20240411-1122.xml
+
+!ENTRY org.eclipse.ui 2 0 2025-01-17 23:35:01.096
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-01-17 23:35:01.096
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.eclipse.ui 2 0 2025-01-17 23:35:02.499
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-01-17 23:35:02.499
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-01-17 23:35:09.795
+!MESSAGE Boot project ADDED: ConfigServer
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-01-17 23:35:09.797
+!MESSAGE Starting Boot LS...
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-01-17 23:35:09.830
+!MESSAGE Started Boot LS process
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-01-17 23:35:09.841
+!MESSAGE Boot project ADDED: Evenment
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-01-17 23:35:09.842
+!MESSAGE Boot project ADDED: Gateway
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-01-17 23:35:09.843
+!MESSAGE Boot project ADDED: Member
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-01-17 23:35:09.845
+!MESSAGE Boot project ADDED: Outil
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-01-17 23:35:09.846
+!MESSAGE Boot project ADDED: Publication
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-01-17 23:35:09.848
+!MESSAGE Boot project ADDED: Registryservice
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2025-01-17 23:35:09.877
+!MESSAGE Command list starting LS: org.springframework.tooling.boot.ls
+START:
+C:\Users\ASUS\sts-4.26.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.4.v20240802-1551\jre\bin\javaw.exe
+-Dsts.lsp.client=eclipse
+-Xmx1024m
+-XX:TieredStopAtLevel=1
+-Dspring.config.location=classpath:/application.properties
+-Xlog:jni+resolve=off
+-XX:ErrorFile=C:/Users/ASUS/Projet_Spring/Back_End/.metadata/.plugins/org.springframework.tooling.boot.ls/fatal-error-spring-boot_1737153309874
+-Dlanguageserver.hover-timeout=225
+-jar
+C:\Users\ASUS\sts-4.26.0.RELEASE\plugins\org.springframework.tooling.boot.ls_1.58.0.202410160331\servers\spring-boot-language-server\spring-boot-language-server-1.58.0-SNAPSHOT-exec.jar
+END
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-01-17 23:35:09.879
+!MESSAGE DelegatingStreamConnectionProvider - Starting Boot LS
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-01-17 23:35:09.990
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\ASUS'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2025-01-17 23:35:10.300
+!MESSAGE Started org.springframework.tooling.boot.ls LS process 112552

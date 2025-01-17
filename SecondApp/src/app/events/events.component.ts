@@ -10,6 +10,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AffecterMemberComponent } from '../affecter-member/affecter-member.component';
 import { MemberService } from 'src/services/member.service';
 import { Router } from '@angular/router';
+import { EventCreateComponent } from '../event-create/event-create.component';
 
 
 
@@ -57,6 +58,9 @@ export class EventsComponent implements OnInit, OnDestroy, AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+  editEvent(id: number): void {
+    this.router.navigate([`/events/${id}/edit`]);
+  }
   consulter(eventId: number): void {
     const dialogConfig = new MatDialogConfig();
 
@@ -80,7 +84,7 @@ export class EventsComponent implements OnInit, OnDestroy, AfterViewInit {
       this.MS.affectMemberToEvent(data.member.id, eventId).subscribe(()=>{
         // or manually add the tool to the existing list
         // this.dataSource.push(toolNew);
-        this.router.navigate(['/dashboard']);
+        location.reload();
         // Close the dialog
 
       });
@@ -90,11 +94,13 @@ export class EventsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
-  delete(id : number): void{
-    this.ES.deleteEvenement(id).subscribe(()=>{
-      this.loadEvents();
-    })
-
+  delete(id: number): void {
+    const confirmed = window.confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');
+    if (confirmed) {
+      this.ES.deleteEvenement(id).subscribe(() => {
+        this.loadEvents();
+      });
+    }
   }
 
 
@@ -104,4 +110,3 @@ export class EventsComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 }
-

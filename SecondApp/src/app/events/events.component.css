@@ -1,14 +1,14 @@
-.pastel-grad{
-  background-image: linear-gradient(112.51deg, #c1d3ff 0%, #dcf5f7 49%, #fcd9e9 100%);
+.container {
+  max-width: 90%;
+  margin: auto;
 }
 
-.justify-content{
-  display: flex;
-  justify-content: center;
+.mat-icon-button {
+  margin: 0 4px;
 }
 
-.cards{
-  width: 85%;
+.cards {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -19,34 +19,39 @@
   margin: 10px;
   flex-basis: calc(25% - 2 * 10px);
   margin-bottom: 16px;
-}
-
-.card-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #007bff; /* Use your preferred color */
-}
-
-.card-container {
-  padding: 16px;
-}
-
-/* Optional: Add some hover effect for better user interaction */
-.event-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transform: scale(1.02);
   transition: box-shadow 0.3s, transform 0.3s;
 }
 
-.txt-date-debut{
-  color: greenyellow
+.event-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
 }
 
-.txt-date-fin{
-  color: red
+.pastel-grad {
+  background-image: linear-gradient(112.51deg, #c1d3ff 0%, #dcf5f7 49%, #fcd9e9 100%);
 }
-.dates{
+
+.dates {
   font-size: 11px;
+}
 
+.mat-header-row {
+  background-color: #f4f4f4;
+}
+
+.mat-row:hover {
+  background-color: #f9f9f9;
+}
+
+h2 {
+  font-weight: 600;
+  color: #66A300;
+}
+
+.txt-date-debut {
+  color: greenyellow;
+}
+
+.txt-date-fin {
+  color: red;
 }
